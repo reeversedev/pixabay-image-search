@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="text-center">
+    <mat-form-field>
+      <input matInput placeholder="Type your choice" [(ngModel)]="searchQuery">
+    </mat-form-field>
+    <button mat-button color="primary" (click)="searchImages(searchQuery)">Search</button>
+  </div>
+  <div class="text-center">
+      <div class="results">
+          <h4 *ngIf="imagesFound" mat-subheader>Results related to {{searchQuery}}</h4>          
+      </div>
+    <masonry [useImagesLoaded]="true">
+      <masonry-brick *ngFor="let image of images" class="image-container">
+        <img mat-card-image src="{{image.webformatURL}}">
+        <mat-card-content>
+          <a href="{{image.pageURL}}" target="_blank"></a>
+          <div class="avatar" mat-card-avatar [ngStyle]="{'background-image':'url('+ image.userImageURL +')', 'background-size':'40px 40px'}"></div>
+          <p>Tags: {{image.tags}}</p>
+          <p>Comments: {{image.comments}}</p>
+          <p>Likes: {{image.likes}}</p>
+        </mat-card-content>
+      </masonry-brick>
+    </masonry>
+  </div>
+</div>
